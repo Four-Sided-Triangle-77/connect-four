@@ -1,0 +1,88 @@
+/* set up the main container with categories*/
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  height: 60vh;
+  gap: 30px;
+}
+/* top left section with the picture and a colored border
+make sure to update. the picture for real pages */
+.topLeft {
+  grid-column: 1;
+  grid-row: 1;
+  background: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+/* description with tags, not functional tags yet,
+expect to have tags clickable with description and/or 
+related events */
+.bottomLeft {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background: lightgreen;
+  border-radius: 30px;
+}
+/* side with description and other info
+not sure what else to put here, could split into
+two separate sections */
+.rightSide {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background: lightcoral;
+  border-radius: 30px;
+}
+/* tags aspect in order to hold words to middle with
+diff font style */
+.tags {
+  position: relative;     
+  color: black;
+  font-size: 1.2rem;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  pointer-events: none;
+  top: 25%;
+  /*left: 50%;*/
+}
+/* description font size */
+.desc {
+  position: relative;     
+  color: black;
+  font-size: 1rem;
+  font-weight: normal;
+  text-align: center;
+  pointer-events: none;
+  top: 25%;
+  /*left: 50%;*/
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Individual buttons */
+.action-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50; /* green */
+  color: white;
+  transition: background 0.3s;
+}
+
+.action-button:hover {
+  background-color: #45a049; /* darker green on hover */
+}
