@@ -6,10 +6,10 @@ import {
   MapPin,
   Users,
   LogOut,
-  GalleryVerticalEnd,
   X,
   Loader2,
 } from "lucide-react"
+import logo from "@/assets/logo_v1.png"
 import { cn } from "@/lib/utils"
 import { auth } from "@/firebaseConfig"
 import { useAuth } from "@/contexts/AuthContext"
@@ -19,14 +19,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog"
-import { Separator } from "@/components/ui/separator"
 
 // ── Gradient palette for cards without cover images ───────────────────────────
 
@@ -153,9 +145,7 @@ export default function Dashboard() {
       <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-2 font-semibold">
-            <div className="flex size-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <GalleryVerticalEnd className="size-4" />
-            </div>
+            <img src={logo} alt="Connect Four" className="h-7 w-7 rounded-md object-cover" />
             <span className="hidden sm:inline">Connect Four</span>
           </div>
 
@@ -525,108 +515,5 @@ function RsvpListItem({
         )}
       </Button>
     </div>
-  )
-}
-
-// ── EventDetailContent ────────────────────────────────────────────────────────
-
-function EventDetailContent({
-  event,
-  isRsvped,
-  rsvpLoading,
-  onRsvp,
-}: {
-  event: Event
-  isRsvped: boolean
-  rsvpLoading: boolean
-  onRsvp: (e: React.MouseEvent) => void
-}) {
-  const isFull =
-    event.capacity != null && (event.rsvpCount ?? 0) >= event.capacity
-  const spotsLeft =
-    event.capacity != null ? event.capacity - (event.rsvpCount ?? 0) : null
-
-  return (
-    <DialogContent className="max-w-lg">
-      {event.imageUrl && (
-        <img
-          src={event.imageUrl}
-          alt={event.title}
-          className="mb-2 h-52 w-full rounded-lg object-cover"
-        />
-      )}
-
-      <DialogHeader>
-        <DialogTitle className="text-xl leading-snug">{event.title}</DialogTitle>
-        {event.tags?.length > 0 && (
-          <div className="flex flex-wrap gap-1 pt-1">
-            {event.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
-      </DialogHeader>
-
-      <div className="flex flex-col gap-2.5 text-sm">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Calendar className="size-4 shrink-0" />
-          {event.dateTime
-            ? format(event.dateTime.toDate(), "EEEE, MMMM d, yyyy · h:mm a")
-            : "—"}
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <MapPin className="size-4 shrink-0" />
-          {event.location}
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Users className="size-4 shrink-0" />
-          {event.rsvpCount ?? 0} attending
-          {spotsLeft !== null && (
-            <span
-              className={cn(
-                spotsLeft <= 5 && spotsLeft > 0 && "font-medium text-orange-500",
-                spotsLeft <= 0 && "font-medium text-destructive"
-              )}
-            >
-              · {spotsLeft > 0 ? `${spotsLeft} spots left` : "No spots left"}
-            </span>
-          )}
-        </div>
-      </div>
-
-      <Separator />
-
-      <DialogDescription className="max-h-48 overflow-y-auto text-sm leading-relaxed text-foreground">
-        {event.description}
-      </DialogDescription>
-
-      {event.hostName && (
-        <p className="text-xs text-muted-foreground">
-          Hosted by {event.hostName}
-        </p>
-      )}
-
-      <Button
-        className="w-full"
-        variant={isRsvped ? "outline" : "default"}
-        disabled={rsvpLoading || (isFull && !isRsvped)}
-        onClick={onRsvp}
-      >
-        {rsvpLoading ? (
-          <>
-            <Loader2 className="mr-2 size-4 animate-spin" />
-            Updating…
-          </>
-        ) : isRsvped ? (
-          "Cancel RSVP"
-        ) : isFull ? (
-          "Event is Full"
-        ) : (
-          "RSVP to this event"
-        )}
-      </Button>
-    </DialogContent>
   )
 }
