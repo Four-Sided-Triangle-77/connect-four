@@ -6,7 +6,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth"
 import { FirebaseError } from "firebase/app"
-import { GalleryVerticalEnd } from "lucide-react"
+import logo from "@/assets/logo_v1.png"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -98,9 +98,7 @@ export default function AdminLoginPage() {
       <div className="flex w-full max-w-sm flex-col gap-6">
         {/* Branding */}
         <div className="flex items-center gap-2 self-center font-medium">
-          <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <GalleryVerticalEnd className="size-4" />
-          </div>
+          <img src={logo} alt="Connect Four" className="h-6 w-6 rounded-md object-cover" />
           Four Sided Triangle
         </div>
 
