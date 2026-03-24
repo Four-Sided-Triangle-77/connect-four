@@ -145,7 +145,7 @@ export default function Dashboard() {
       <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-2 font-semibold">
-            <img src={logo} alt="Connect Four" className="h-7 w-7 rounded-md object-cover" />
+            <img src={logo} alt="Connect Four" className="h-10 w-10 rounded-md object-cover" />
             <span className="hidden sm:inline">Connect Four</span>
           </div>
 

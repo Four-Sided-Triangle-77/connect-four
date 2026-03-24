@@ -35,7 +35,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <aside className="flex w-60 shrink-0 flex-col border-r bg-card">
         {/* Logo */}
         <div className="flex h-14 items-center gap-2 border-b px-4">
-          <img src={logo} alt="Connect Four" className="h-6 w-6 rounded-md object-cover" />
+          <img src={logo} alt="Connect Four" className="h-10 w-10 rounded-md object-cover" />
           <span className="text-sm font-semibold tracking-tight">
             Admin Portal
           </span>
