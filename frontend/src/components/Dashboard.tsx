@@ -56,7 +56,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [rsvpLoading, setRsvpLoading] = useState<string | null>(null)
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
+  //const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
 
   // Load published events + current user's RSVP set
   useEffect(() => {
@@ -80,13 +80,13 @@ export default function Dashboard() {
   }, [user])
 
   // Keep the detail modal in sync when rsvpCount updates locally
-  useEffect(() => {
+  /*useEffect(() => {
     if (selectedEvent) {
       const updated = events.find((e) => e.id === selectedEvent.id)
       if (updated) setSelectedEvent(updated)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [events])
+  }, [events])*/
 
   const handleLogout = async () => {
     await auth.signOut()
@@ -264,7 +264,7 @@ export default function Dashboard() {
                     isRsvped={rsvpedIds.has(event.id)}
                     rsvpLoading={rsvpLoading === event.id}
                     onRsvp={handleRsvp}
-                    onClick={() => setSelectedEvent(event)}
+                    onClick={() => navigate("/event", { state: event })}
                   />
                 ))}
               </div>
@@ -301,7 +301,7 @@ export default function Dashboard() {
                     event={event}
                     rsvpLoading={rsvpLoading === event.id}
                     onCancel={(e) => handleRsvp(event, e)}
-                    onClick={() => setSelectedEvent(event)}
+                    onClick={() => navigate("/event", { state: event })}
                   />
                 ))}
               </div>
@@ -311,7 +311,7 @@ export default function Dashboard() {
       </main>
 
       {/* ── Event detail modal ────────────────────────────────── */}
-      <Dialog
+      {/*<Dialog
         open={!!selectedEvent}
         onOpenChange={(open) => !open && setSelectedEvent(null)}
       >
@@ -323,7 +323,7 @@ export default function Dashboard() {
             onRsvp={(e) => handleRsvp(selectedEvent, e)}
           />
         )}
-      </Dialog>
+      </Dialog>*/}
     </div>
   )
 }
