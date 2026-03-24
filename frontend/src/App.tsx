@@ -12,6 +12,8 @@ import AdminLayout from './components/admin/AdminLayout'
 import AdminDashboard from './components/admin/AdminDashboard'
 import EventForm from './components/admin/EventForm'
 
+import EventScreen from './components/EventDisplay';
+
 import './App.css'
 
 function App() {
@@ -65,6 +67,10 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route 
+            path="/event" 
+            element={
+            <EventScreen />} />
 
           {/* ── Fallback ───────────────────────────────────────── */}
           <Route path="/" element={<Navigate to="/login" replace />} />
