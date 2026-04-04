@@ -1,4 +1,5 @@
 import logo from "@/assets/logo_v1.png"
+import { SignupForm } from "@/components/signup-form"
 
 export default function SignupPage() {
   return (

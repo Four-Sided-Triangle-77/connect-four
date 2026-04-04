@@ -7,6 +7,8 @@ interface ProtectedRouteProps {
   requiredRole?: "admin" | "user"
   /** Where to redirect unauthenticated visitors. Defaults to /login. */
   redirectTo?: string
+  /** Skip onboarding check (used for the onboarding route itself). */
+  skipOnboardingCheck?: boolean
 }
 
 /**
@@ -17,8 +19,9 @@ export function ProtectedRoute({
   children,
   requiredRole,
   redirectTo = "/login",
+  skipOnboardingCheck = false,
 }: ProtectedRouteProps) {
-  const { user, role, loading } = useAuth()
+  const { user, role, onboardingComplete, loading } = useAuth()
 
   if (loading) {
     return (
@@ -32,6 +35,11 @@ export function ProtectedRoute({
 
   if (requiredRole === "admin" && role !== "admin") {
     return <Navigate to="/login" replace />
+  }
+
+  // Redirect regular users to onboarding if they haven't completed it
+  if (!skipOnboardingCheck && role !== "admin" && !onboardingComplete) {
+    return <Navigate to="/onboarding" replace />
   }
 
   return <>{children}</>
