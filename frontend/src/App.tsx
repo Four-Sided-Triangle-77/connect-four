@@ -5,6 +5,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 
 import LoginPage from './components/LoginPage'
 import SignupPage from './components/SignupPage'
+import OnboardingPage from './components/OnboardingPage'
 import Dashboard from './components/Dashboard'
 
 import AdminLoginPage from './components/admin/AdminLoginPage'
@@ -24,6 +25,16 @@ function App() {
           {/* ── Public routes ─────────────────────────────────── */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+
+          {/* ── Onboarding ────────────────────────────────────── */}
+          <Route
+            path="/onboarding"
+            element={
+              <ProtectedRoute skipOnboardingCheck>
+                <OnboardingPage />
+              </ProtectedRoute>
+            }
+          />
 
           {/* ── Authenticated user routes ──────────────────────── */}
           <Route
