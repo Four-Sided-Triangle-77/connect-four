@@ -20,7 +20,7 @@ interface AdminLayoutProps {
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
-  const { user } = useAuth()
+  const { user, role } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -37,7 +37,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="flex h-14 items-center gap-2 border-b px-4">
           <img src={logo} alt="Connect Four" className="h-10 w-10 rounded-md object-cover" />
           <span className="text-sm font-semibold tracking-tight">
-            Admin Portal
+            {role === "superadmin" ? "Admin Portal" : "Club Portal"}
           </span>
         </div>
 

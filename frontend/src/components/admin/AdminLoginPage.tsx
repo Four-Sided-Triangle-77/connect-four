@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { auth } from "@/firebaseConfig"
-import { ensureUserDoc } from "@/lib/users"
+import { ensureUserDoc, isAdminRole } from "@/lib/users"
 
 const googleProvider = new GoogleAuthProvider()
 
@@ -36,10 +36,10 @@ export default function AdminLoginPage() {
   const [googleLoading, setGoogleLoading] = useState(false)
   const navigate = useNavigate()
 
-  /** Verify the signed-in user has admin role; redirect or show error. */
+  /** Verify the signed-in user has an admin-level role; redirect or show error. */
   const authorizeAdmin = async () => {
     const role = await ensureUserDoc(auth.currentUser!)
-    if (role === "admin") {
+    if (isAdminRole(role)) {
       navigate("/admin/dashboard")
     } else {
       await auth.signOut()

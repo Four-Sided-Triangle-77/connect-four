@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom"
 import { useAuth } from "@/contexts/AuthContext"
+import { isAdminRole } from "@/lib/users"
 
 interface ProtectedRouteProps {
   children: React.ReactNode
-  /** If provided, the user must have this role to access the route. */
+  /** If provided, the user must have an admin-level role to access the route. */
   requiredRole?: "admin" | "user"
   /** Where to redirect unauthenticated visitors. Defaults to /login. */
   redirectTo?: string
@@ -33,12 +34,12 @@ export function ProtectedRoute({
 
   if (!user) return <Navigate to={redirectTo} replace />
 
-  if (requiredRole === "admin" && role !== "admin") {
+  if (requiredRole === "admin" && !isAdminRole(role)) {
     return <Navigate to="/login" replace />
   }
 
   // Redirect regular users to onboarding if they haven't completed it
-  if (!skipOnboardingCheck && role !== "admin" && !onboardingComplete) {
+  if (!skipOnboardingCheck && !isAdminRole(role) && !onboardingComplete) {
     return <Navigate to="/onboarding" replace />
   }
 
