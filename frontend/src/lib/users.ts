@@ -8,7 +8,12 @@ import {
 import type { User } from "firebase/auth"
 import { db } from "@/firebaseConfig"
 
-export type UserRole = "admin" | "user"
+export type UserRole = "superadmin" | "club_leader" | "user"
+
+/** Returns true for roles that can access the admin panel. */
+export function isAdminRole(role: UserRole | null): boolean {
+  return role === "superadmin" || role === "club_leader"
+}
 
 export interface UserProfile {
   role: UserRole

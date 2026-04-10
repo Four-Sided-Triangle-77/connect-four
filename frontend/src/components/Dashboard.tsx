@@ -120,6 +120,9 @@ export default function Dashboard() {
           )
         )
       }
+    } catch (err) {
+      console.error("RSVP failed:", err)
+      setLoadError("RSVP failed. Please try again.")
     } finally {
       setRsvpLoading(null)
     }
